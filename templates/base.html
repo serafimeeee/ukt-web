@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Prediksi KIP-K{% endblock %}</title>
+<style>
+:root{--bg:#f2f5f7;--ink:#14232c;--mute:#5d6f7a;--line:#d3dde3;--acc:#1c5fb8;--ok:#14733f;--no:#a3361f;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Segoe UI",system-ui,sans-serif}
+header{background:var(--ink);color:#fff}
+.bar{max-width:880px;margin:auto;padding:14px 20px;display:flex;gap:24px;align-items:baseline;flex-wrap:wrap}
+.bar b{font-size:18px;margin-right:auto}
+.bar a{color:#c9d6dd;text-decoration:none;padding-bottom:2px}
+.bar a:hover,.bar a.on{color:#fff;border-bottom:2px solid #fff}
+main{max-width:880px;margin:28px auto;padding:0 20px}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px}
+.sub{color:var(--mute);margin:0 0 24px;max-width:60ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+label{display:block;font-weight:600;font-size:14px;margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:4px;font:inherit;background:#fff}
+input:focus,select:focus,button:focus-visible{outline:3px solid #9cc2f2;outline-offset:1px}
+button{margin-top:20px;background:var(--acc);color:#fff;border:0;border-radius:4px;padding:11px 22px;font:inherit;font-weight:600;cursor:pointer}
+button:hover{background:#174f9a}
+.hasil{margin-bottom:20px;padding:20px 22px;border-left:8px solid var(--no);background:#fff;border-radius:0 6px 6px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hasil.ok{border-left-color:var(--ok)}
+.hasil .big{font-size:34px;font-weight:700;line-height:1.1;color:var(--no)}
+.hasil.ok .big{color:var(--ok)}
+.err{background:#fdecea;border:1px solid #f1b9b0;color:#7a2616;padding:10px 14px;border-radius:4px;margin-bottom:16px}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{background:#eaf0f4}
+td.n,th.n{text-align:right}
+.tag{font-weight:600}.tag.ok{color:var(--ok)}.tag.no{color:var(--no)}
+</style>
+</head>
+<body>
+<header><div class="bar"><b>Prediksi KIP-K</b>
+<a href="/" class="{{ 'on' if request.path == '/' }}">Prediksi baru</a>
+<a href="/riwayat" class="{{ 'on' if request.path == '/riwayat' }}">Riwayat</a></div></header>
+<main>{% block content %}{% endblock %}</main>
+</body>
+</html>

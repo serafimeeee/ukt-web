@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Cek potensi penerima KIP-K</h1>
+<p class="sub">Isi data keluarga mahasiswa. Model logistic regression memperkirakan apakah mahasiswa berpotensi menerima KIP-K, dan hasilnya tersimpan di riwayat.</p>
+
+{% if hasil %}
+<div class="hasil {{ 'ok' if hasil.layak }}">
+  <div class="big">{{ hasil.label }}</div>
+  <div>Probabilitas KIP-K: {{ hasil.persen }}%</div>
+</div>
+{% endif %}
+{% if error %}<div class="err">{{ error }}</div>{% endif %}
+
+<form method="post" class="card">
+ <div class="grid">
+  <div><label for="StatusOrtu">Status orang tua</label>
+   <select id="StatusOrtu" name="StatusOrtu" required>
+    {% for k, v in status_ortu.items() %}<option value="{{ k }}" {{ 'selected' if nilai.get('StatusOrtu')|string == k|string }}>{{ v }}</option>{% endfor %}
+   </select></div>
+  <div><label for="Penghasilan">Penghasilan orang tua per bulan (Rp)</label>
+   <input id="Penghasilan" name="Penghasilan" type="number" min="0" step="1" required value="{{ nilai.get('Penghasilan','') }}"></div>
+  <div><label for="Status_Rumah">Status rumah</label>
+   <select id="Status_Rumah" name="Status_Rumah" required>
+    {% for k, v in rumah.items() %}<option value="{{ k }}" {{ 'selected' if nilai.get('Status_Rumah')|string == k|string }}>{{ v }}</option>{% endfor %}
+   </select></div>
+  <div><label for="JMotor">Jumlah motor</label>
+   <input id="JMotor" name="JMotor" type="number" min="0" required value="{{ nilai.get('JMotor','') }}"></div>
+  <div><label for="Jmobil">Jumlah mobil</label>
+   <input id="Jmobil" name="Jmobil" type="number" min="0" required value="{{ nilai.get('Jmobil','') }}"></div>
+  <div><label for="DayaLis">Daya listrik</label>
+   <select id="DayaLis" name="DayaLis" required>
+    {% for k, v in listrik.items() %}<option value="{{ k }}" {{ 'selected' if nilai.get('DayaLis')|string == k|string }}>{{ v }}</option>{% endfor %}
+   </select></div>
+ </div>
+ <button type="submit">Prediksi dan simpan</button>
+</form>
+{% endblock %}

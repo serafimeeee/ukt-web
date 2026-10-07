@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Riwayat prediksi{% endblock %}
+{% block content %}
+<h1>Riwayat prediksi</h1>
+<p class="sub">100 prediksi terakhir yang tersimpan di database MySQL.</p>
+{% if rows %}
+<div class="card tbl"><table>
+ <tr><th class="n">#</th><th>Waktu</th><th>Status ortu</th><th class="n">Penghasilan</th><th>Rumah</th><th class="n">Motor</th><th class="n">Mobil</th><th>Listrik</th><th>Hasil</th><th class="n">Prob.</th></tr>
+ {% for r in rows %}
+ <tr><td class="n">{{ r.id }}</td><td>{{ r.waktu.strftime('%d-%m-%Y %H:%M') }}</td><td>{{ r.status_ortu }}</td>
+ <td class="n">{{ '{:,}'.format(r.penghasilan).replace(',', '.') }}</td><td>{{ r.status_rumah }}</td>
+ <td class="n">{{ r.jml_motor }}</td><td class="n">{{ r.jml_mobil }}</td><td>{{ r.daya_listrik }}</td>
+ <td class="tag {{ 'ok' if r.hasil.startswith('Berpotensi') else 'no' }}">{{ r.hasil }}</td><td class="n">{{ (r.probabilitas*100)|round(1) }}%</td></tr>
+ {% endfor %}
+</table></div>
+{% else %}
+<div class="card">Belum ada prediksi. <a href="/">Buat prediksi pertama</a>.</div>
+{% endif %}
+{% endblock %}

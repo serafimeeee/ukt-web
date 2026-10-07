@@ -1,0 +1,8 @@
+flask
+flask-sqlalchemy
+pymysql
+cryptography
+scikit-learn
+pandas
+joblib
+gunicorn
